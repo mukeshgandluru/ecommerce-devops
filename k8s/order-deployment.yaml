@@ -31,6 +31,8 @@ spec:
           envFrom:
           - configMapRef:
               name: ecommerce-config
+          - secretRef:
+                name: ecommerce-secret
 
           ports:
             - containerPort: 5003
