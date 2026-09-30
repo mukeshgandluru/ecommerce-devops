@@ -8,6 +8,12 @@ metadata:
 spec:
   replicas: 2
 
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
   selector:
     matchLabels:
       app: order-service
@@ -21,6 +27,10 @@ spec:
       containers:
         - name: order-service
           image: 035074950883.dkr.ecr.us-east-1.amazonaws.com/ecommerce-order-service:1.0
+
+          envFrom:
+          - configMapRef:
+              name: ecommerce-config
 
           ports:
             - containerPort: 5003
